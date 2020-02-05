@@ -1,0 +1,15 @@
+[submodule "undicht/vendor/glfw"]
+	path = undicht/vendor/glfw
+	url = https://github.com/ebanjo-2/glfw
+[submodule "undicht/vendor/glad"]
+	path = undicht/vendor/glad
+	url = https://github.com/ebanjo-2/glad
+[submodule "undicht/vendor/glm-deprecated"]
+	path = undicht/vendor/glm-deprecated
+	url = https://github.com/ebanjo-2/glm-deprecated.git
+[submodule "undicht/vendor/stb"]
+	path = undicht/vendor/stb
+	url = https://github.com/ebanjo-2/stb.git
+[submodule "undicht/vendor/glm"]
+	path = undicht/vendor/glm
+	url = https://github.com/ebanjo-2/glm.git

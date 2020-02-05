@@ -2,7 +2,7 @@
 *
 
 
-# except
+# except source files
 !.gitignore
 !*/
 !*.cpp
@@ -12,3 +12,5 @@
 !*.txt
 !README.md
 
+# and submodules
+!undicht/vendor/*
