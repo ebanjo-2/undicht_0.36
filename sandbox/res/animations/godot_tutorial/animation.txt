@@ -1,0 +1,10 @@
+// the number behind 'frame' determines when to switch to the image referenced 
+
+frame 0.0 playerGrey_walk1.png
+frame 0.2 playerGrey_walk2.png
+//frame 0.4 tux_small_walk_3.png
+//frame 0.6 tux_small_walk_2.png
+
+// the duration time of the whole animation
+
+duration 0.4

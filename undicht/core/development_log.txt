@@ -1,0 +1,68 @@
+EventLogger of the development of the undicht engine (0.3) core
+
+concept idea:
+- core gives the rest of the engine a single interface to platform specific stuff
+- like the graphic api (opengl, directx, vulcan ...) or the window api (glfw, ...)
+- project started: 17.08.2019
+
+implementation of the core:
+21.08.2019:
+- creating core.h + core.cpp
+- adding shared_lib.h and .cpp to the project
+- creating, planning and implementing of the event_EventLoggerger and event classes
+
+22.08.2019
+- added the old garbage_collector.h and .cpp to the core, renamed them to memory_watcher.h and cpp
+-- its first use should be to monitor the temporary messages of events
+- implemented basic functions for the event class (including the static message storage)
+
+23.08.2019
+- working on making the SharedLib class platform independent and trying to get it to work on windows & linux
+
+24.08.2019
+- added project configurations for windows / linux
+- made core class functions static
+- added an origin to events
+- renamed EventEventLoggerger to EventStack
+- implemented & tested basic Event & EventStack functionality (i.e. dll error 126 is now a static message...)
+- started adding the window_glfw core library
+
+25.08.2019
+- removed the static storing of messages for temporary ones
+- trying to load a Window from the window_glfw library, getting error 127, which means the functions createWindow and deleteWindow where not found
+- fixed the bug by changing the makro SHARED_LIB_EXPORT, now opening a window works (YAY!)
+- moved back to linux (wochenende vorbei:(), window opening still works (after some debugging)
+
+26.08.2019
+- (nach einem tag voller zaunbau (mit Pfahlramme)(und jetzt mit recht zittrigen Händen...), fenster putzen und drille tanken)
+- created the GraphicsContext class
+
+27.08.2019
+- got the GraphicsContext class to worḱ, moved it into the window project
+- added headers to the implementing window library
+
+28.08.2019
+- created the WindowLib class
+
+29 - 31.08.2019
+- trying to make the shared lib code simpler and more readable
+- Macros didnt work so well, now trying with std::function
+- got it working again after totally not screwing up trying to make the shared lib stuff more readable
+- still some cleaning up to be done before development can go on
+    - implemented the macros SHARED_LIB_DECL_BASE_CLASS() and SHARED_LIB_DEF_BASE_CLASS() to do the job ...
+- saving undicht 0.3.3
+- back on linux, worked flawlessly once I rebuild the project with premake
+
+01.09.2019
+- blödes Hoffest :D
+
+02.09.2019
+- starting the core graphics library
+- creating the class GraphicsLib, having some issues with calling initialize from the shared lib
+- edit: i am stupid, forgot to open the SharedLib
+- successfully initialized glad, cleared the window with green by calling glClear
+- so opengl seems to work :D
+
+03.09.2019
+- created vram_buffer.h
+
