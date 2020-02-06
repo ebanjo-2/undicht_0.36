@@ -5,6 +5,7 @@
 #include <3D/noclip_camera.h>
 #include <file_loading/model/collada/collada_file_reader.h>
 #include <3D/model_renderer.h>
+#include <3D/deferred_shading/geometry_stage_renderer.h>
 
 #include <window/window.h>
 #include <window/key_input_watcher.h>
@@ -28,6 +29,8 @@ namespace undicht {
             ColladaFileReader m_dae_reader;
 
             ModelRenderer m_renderer;
+            GeometryStageRenderer m_geometry_stage;
+            GBuffer m_geometry_buffer;
 
         public:
 

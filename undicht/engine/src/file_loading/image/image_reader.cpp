@@ -55,7 +55,7 @@ namespace undicht {
 
     void ImageReader::loadAnimation(Animation2D& anim, std::string file_name) {
 
-        // expecting a .txt file saying what textures need to loaded
+        // expecting a .txt file saying what textures need to be loaded
         FileReader reader(file_name);
 
         std::vector<std::string> texture_names;

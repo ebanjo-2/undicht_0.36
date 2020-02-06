@@ -9,12 +9,14 @@ namespace undicht {
 
 
     class ModelRenderer;
+    class GeometryStageRenderer;
 
     class Object3D {
 
         protected:
 
             friend ModelRenderer;
+            friend GeometryStageRenderer;
 
             glm::vec3 m_position = glm::vec3(0.0f,0.0f,0.0f);
             glm::vec3 m_scale = glm::vec3(1.0f);

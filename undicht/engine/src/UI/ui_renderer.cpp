@@ -45,13 +45,13 @@ namespace undicht {
         s_quad_vbo = new VertexBuffer;
 
         // loading the shader source
-        std::string file_path = getFilePath(replaceAll(UND_CODE_SRC_FILE, (char)92, '/')) + "shader/textured_element.txt";
+        std::string file_path = getFilePath(replaceAll(UND_CODE_SRC_FILE, (char)92, '/')) + "shader/textured_element.glsl";
         std::string source_buffer;
 
         FileReader reader(file_path);
         s_textured_element_shader->loadSource(reader.getAll(source_buffer));
 
-        file_path = getFilePath(replaceAll(UND_CODE_SRC_FILE, (char)92, '/')) + "shader/text.txt";
+        file_path = getFilePath(replaceAll(UND_CODE_SRC_FILE, (char)92, '/')) + "shader/text.glsl";
 
         reader.open(file_path);
         s_text_shader->loadSource(reader.getAll(source_buffer));

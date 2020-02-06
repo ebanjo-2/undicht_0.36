@@ -70,6 +70,10 @@ int main(){
         double first_time = Core::getTime();
         int frame_count = 1;
 
+        // displaying the 3d scene rendered to the geometry buffer on button 1
+        ui_demo.m_button.m_texture = demo_3d.m_geometry_buffer.m_albedo;
+
+
         while(!window->shouldClose()) {
 
             window->update();
@@ -80,6 +84,7 @@ int main(){
 
             demo_3d.update();
             demo_3d.draw();
+
 
             // draw ui on top of 3d
             ui_demo.update();

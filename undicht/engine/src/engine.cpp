@@ -9,6 +9,7 @@
 #include <core/event_logger.h>
 #include <iostream>
 
+#include <3D/deferred_shading/geometry_stage_renderer.h>
 #include <3D/model_renderer.h>
 #include <UI/ui_renderer.h>
 
@@ -36,6 +37,7 @@ namespace undicht {
 
         GraphicsLib::initialize(context);
 
+        GeometryStageRenderer::initialize();
         ModelRenderer::initialize();
         UIRenderer::initialize();
 
@@ -45,6 +47,7 @@ namespace undicht {
 
         UIRenderer::terminate();
         ModelRenderer::terminate();
+        GeometryStageRenderer::terminate();
 
         GraphicsLib::terminate();
 

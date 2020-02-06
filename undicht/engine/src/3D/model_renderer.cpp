@@ -8,7 +8,7 @@ namespace undicht {
     using namespace core;
 
     Shader* ModelRenderer::s_shader;
-    const std::string ModelRenderer::s_shader_src = "shader/model_shader.txt";
+    const std::string ModelRenderer::s_shader_src = "shader/model_shader.glsl";
 
 
 

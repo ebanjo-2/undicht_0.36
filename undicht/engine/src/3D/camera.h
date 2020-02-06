@@ -8,6 +8,7 @@
 namespace undicht {
 
     class ModelRenderer;
+    class GeometryStageRenderer;
 
 
     class Camera3D : protected Object3D {
@@ -15,6 +16,7 @@ namespace undicht {
         protected:
 
             friend ModelRenderer;
+            friend GeometryStageRenderer;
 
             float m_FoV = 100;
             float m_aspect_ratio = 1.6f;

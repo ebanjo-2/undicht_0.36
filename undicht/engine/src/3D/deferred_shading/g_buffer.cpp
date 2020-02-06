@@ -10,13 +10,21 @@ namespace undicht {
     GBuffer::GBuffer() {
         //ctor
 
-        addAttachment(m_albedo, UND_COLOR_ATTACHMENT);
-        addAttachment(m_depth, UND_DEPTH_ATTACHMENT_READ_AND_WRITE);
+
 
     }
 
     GBuffer::~GBuffer() {
         //dtor
+    }
+
+
+    void GBuffer::initialize() {
+        /** to be called after the size was set */
+
+        addAttachment(m_albedo, UND_COLOR_ATTACHMENT);
+        addAttachment(m_depth, UND_DEPTH_ATTACHMENT_READ_AND_WRITE);
+
     }
 
 } // undicht
