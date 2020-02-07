@@ -1,5 +1,6 @@
 #include "fnt_file_reader.h"
 #include <string.h>
+#include <cstdlib>
 #include <core/event_logger.h>
 #include <file_loading/image/image_reader.h>
 
@@ -144,7 +145,7 @@ namespace undicht {
 
         size_t int_start = source.find(string_before_int) + string_before_int.size();
 
-        return stoi(source.substr(int_start));
+        return atoi(source.substr(int_start).data());
     }
 
 
