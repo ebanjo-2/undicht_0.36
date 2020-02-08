@@ -14,7 +14,7 @@
 namespace undicht {
 
 
-    class GeometryStageRenderer {
+    class GeometryStageRenderer : public graphics::Renderer {
         /** a renderer that can be used to draw a scene into a geometry buffer
         * so that deferred shading can be applied to it */
         protected:

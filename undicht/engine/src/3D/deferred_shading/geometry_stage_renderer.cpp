@@ -59,9 +59,6 @@ namespace undicht {
     }
 
     void GeometryStageRenderer::submit(Camera3D* cam) {
-
-        std::cout << "loading camera uniforms" << "\n";
-
         m_current_cam = cam;
         s_geometry_stage_shader->loadUniform(m_current_cam->m_proj_uniform);
         s_geometry_stage_shader->loadUniform(m_current_cam->m_view_uniform);
@@ -75,13 +72,10 @@ namespace undicht {
         Renderer::enableBackFaceCulling(true);
 
 
-        std::cout << "before loading any uniforms" << "\n";
         // loading the uniforms of the model
         s_geometry_stage_shader->loadTexture(model.m_color);
         s_geometry_stage_shader->loadUniform(model.m_scale_uniform);
         s_geometry_stage_shader->loadUniform(model.m_transf_uniform);
-
-                std::cout << "getting till here" << "\n";
 
 
         ((Renderer*)this)->submit(&model.m_mesh);

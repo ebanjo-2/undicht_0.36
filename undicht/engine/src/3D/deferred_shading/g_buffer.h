@@ -16,7 +16,7 @@ namespace undicht {
             graphics::Texture m_depth;
 
             void initialize();
-
+            void terminate();
 
             GBuffer();
             virtual ~GBuffer();

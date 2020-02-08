@@ -35,7 +35,7 @@ void main() {
 in vec2 uv;
 
 // outputs to geometry buffer
-out vec4 albedo;
+out vec3 albedo;
 
 
 uniform sampler2D color;
@@ -43,6 +43,6 @@ uniform sampler2D color;
 
 void main() {
     
-    albedo = texture(color, uv);
+    albedo = texture(color, uv).rgb;
 
 }

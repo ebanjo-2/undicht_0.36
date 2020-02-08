@@ -39,6 +39,16 @@ namespace undicht {
     bool Button::onMousePress(const glm::vec2& cursor_pos, int button_id, int button_state) {
         /** @return true if the input was used by the ui element */
 
+        int width, height;
+        m_texture.getSize(width, height);
+
+        std::cout << "texture size: " << width << " " << height << "\n";
+
+        if((width != 1) || (height != 1)) {
+            // no button press for u (no changing the color)
+            return false;
+        }
+
         // testing if the button was pressed
         glm::vec2 upper_left = getPositionOnScreen() + (getSizeOnScreen() * glm::vec2(-0.5, 0.5));
         glm::vec2 lower_right = upper_left + getSizeOnScreen() * glm::vec2(1, -1);

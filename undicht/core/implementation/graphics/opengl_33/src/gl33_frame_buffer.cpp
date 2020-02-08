@@ -32,28 +32,41 @@ namespace undicht {
             void FrameBuffer::setSize(int width, int height) {
                 /** setting the size of the framebuffer and all of its attachments */
 
+                if((width == m_width) && (height == m_height)) {
+                    return;
+                }
+
                 m_width = width;
                 m_height = height;
+
+                std::cout << "resizing the framebuffer to " << width << " " << height << "\n";
+
 
                 // according to this: https://gamedev.stackexchange.com/questions/91991/resizing-a-framebuffer-object-ie-its-attachments-on-screen-resize
                 // the framebuffer should be deleted and a new one with the desired size should be created
 
                 if(m_attachments.size()) {
-                    glDeleteFramebuffers(1, &m_id.m_id);
+
+                    if(m_id.removeUser()) {
+                        glDeleteFramebuffers(1, &m_id.m_id);
+                    }
+
                     glGenFramebuffers(1, &m_id.m_id);
                 }
 
-                // resizing all attachments & attaching them to the new fbo
+                // reattaching them to the new fbo
                 for(int i = 0; i < m_attachments.size(); i++) {
 
-                    m_attachments.at(i)->setSize(width, height, 1);
+                    // for sending an graphics::Texture to the function
+                    graphics::Texture graphics_texture;
+                    graphics_texture.m_shared_lib_object = m_attachments.at(i);
 
-                    graphics::Texture core_texture;
-                    core_texture.m_shared_lib_object = m_attachments.at(i);
-                    addAttachment(core_texture, m_attachment_types.at(i));
+                    addAttachment(graphics_texture, m_attachment_types.at(i));
+
+                    // the attachment got stored again
+                    m_attachments.pop_back();
+                    m_attachment_types.pop_back();
                 }
-
-
 
             }
 
@@ -81,8 +94,9 @@ namespace undicht {
 
                     opengl_texture->setSize(m_width, m_height, 1);
 
-                    glBindFramebuffer(m_type, m_id); // binding the Framebuffer
-                    glBindTexture(GL_TEXTURE_2D, opengl_texture->m_id); // binding the texture
+                    bind(); // binding the Framebuffer
+                    opengl_texture->bind(); // binding the texture
+                    opengl_texture->setData(0, 0);// reserving memory
                     std::cout << "adding color attachment " << getColorOutputCount() << "\n";
                     glFramebufferTexture2D(m_type, GL_COLOR_ATTACHMENT0 + getColorOutputCount(), GL_TEXTURE_2D, opengl_texture->m_id, 0);
 
@@ -90,9 +104,11 @@ namespace undicht {
                     // attaching a texture that can store the depth values of a scene
                     opengl_texture->setOpenglFormat(GL_DEPTH_COMPONENT, GL_DEPTH_COMPONENT);
                     opengl_texture->setSize(m_width, m_height, 1);
+                    opengl_texture->setData(0, 0);// reserving memory
 
-                    glBindFramebuffer(m_type, m_id); // binding the Framebuffer
-                    glBindTexture(GL_TEXTURE_2D, opengl_texture->m_id); // binding the texture
+                    bind(); // binding the Framebuffer
+                    opengl_texture->bind(); // binding the texture
+                    std::cout << "adding depth attachment" << "\n";
                     glFramebufferTexture2D(m_type, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, opengl_texture->m_id, 0);
 
                 } else if (attachment_type == UND_DEPTH_ATTACHMENT_WRITE_ONLY) {
@@ -126,11 +142,11 @@ namespace undicht {
 
                 checkStatus();
 
-                glBindFramebuffer(m_type, m_id);
+                bind();
                 glViewport(0, 0, m_width, m_height);
 
                 glClearColor(0.0f, 0.0f, 0.5f, 1.0f);
-                glClear(GL_COLOR_BUFFER_BIT);
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                 undCheckGLError(UND_CODE_ORIGIN);
 
@@ -181,7 +197,7 @@ namespace undicht {
             void FrameBuffer::checkStatus() {
                 // prints an Error message if the fbo is not ready to use
 
-                glBindFramebuffer(m_type, m_id);
+                bind();
                 unsigned int status = glCheckFramebufferStatus(m_type);
                 switch(status) {
                     case GL_FRAMEBUFFER_COMPLETE:
@@ -197,19 +213,13 @@ namespace undicht {
 
             void FrameBuffer::bind() {
 
-                if(m_id != bound_fbo) {
-
-                    glBindFramebuffer(m_type, m_id);
-                    bound_fbo = m_id;
-
-                }
+                bind(m_id);
 
             }
 
             void FrameBuffer::bind(int id) {
 
                 if(id != bound_fbo) {
-
                     glBindFramebuffer(GL_FRAMEBUFFER, id);
                     bound_fbo = id;
 

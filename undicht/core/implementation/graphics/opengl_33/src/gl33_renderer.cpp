@@ -38,7 +38,9 @@ namespace undicht {
             void Renderer::submit(graphics::FrameBuffer* fbo) {
 
                 if(fbo) {
+
                     m_current_fbo = (gl33::FrameBuffer*)fbo->m_shared_lib_object;
+                    m_current_fbo->checkStatus();
                 } else {
                     m_current_fbo = 0;
                 }
