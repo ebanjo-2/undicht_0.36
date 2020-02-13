@@ -98,23 +98,36 @@ namespace undicht {
 
             Label& label = *((Label*)&e);
 
-            m_position_uniform.setData(glm::value_ptr(e.getPositionOnScreen()), UND_VEC2F);
-            m_scale_uniform.setData(glm::value_ptr(e.getSizeOnScreen()), UND_VEC2F);
+            if(label.getCharCount()) {
 
-            s_text_shader->loadUniform(label.getFontSize());
-            s_text_shader->loadUniform(label.getTextData());
-            s_text_shader->loadUniform(label.getColor());
-            s_text_shader->loadUniform(label.getEdgeColor());
+                m_position_uniform.setData(glm::value_ptr(e.getPositionOnScreen()), UND_VEC2F);
+                m_scale_uniform.setData(glm::value_ptr(e.getSizeOnScreen()), UND_VEC2F);
+                s_text_shader->loadUniform(label.getFontSize());
+                s_text_shader->loadUniform(label.getTextData());
+                s_text_shader->loadUniform(label.getColor());
+                s_text_shader->loadUniform(label.getEdgeColor());
 
-            s_text_shader->loadUniform(m_position_uniform);
-            s_text_shader->loadUniform(m_scale_uniform);
-            s_text_shader->loadTexture(label.getFont().m_font_map);
+                s_text_shader->loadUniform(m_position_uniform);
+                s_text_shader->loadUniform(m_scale_uniform);
+
+                if(&label.getFont()) {
+
+                    s_text_shader->loadTexture(label.getFont().m_font_map);
+
+                } else {
+
+                    EventLogger::storeNote(Note(UND_ERROR, "UI:ERROR: cant draw text without font", UND_CODE_ORIGIN));
+
+                }
 
 
-            submit(s_text_shader);
-            submit(s_quad_vbo);
+                submit(s_text_shader);
+                submit(s_quad_vbo);
 
-            ((Renderer*)this)->draw(label.getCharCount());
+                ((Renderer*)this)->draw(label.getCharCount());
+            }
+
+
 
         }
 

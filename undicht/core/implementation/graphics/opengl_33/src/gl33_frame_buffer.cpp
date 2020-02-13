@@ -60,12 +60,14 @@ namespace undicht {
                     // for sending an graphics::Texture to the function
                     graphics::Texture graphics_texture;
                     graphics_texture.m_shared_lib_object = m_attachments.at(i);
+                    int type = m_attachment_types.at(i);
 
-                    addAttachment(graphics_texture, m_attachment_types.at(i));
+                    // the attachment gets stored again
+                    m_attachments.erase(m_attachments.begin() + i);
+                    m_attachment_types.erase(m_attachment_types.begin() + i);
 
-                    // the attachment got stored again
-                    m_attachments.pop_back();
-                    m_attachment_types.pop_back();
+
+                    addAttachment(graphics_texture, type);
                 }
 
             }

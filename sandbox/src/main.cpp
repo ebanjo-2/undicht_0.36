@@ -72,7 +72,7 @@ int main(){
 
         // displaying the 3d scene rendered to the geometry buffer on button 1
         ui_demo.m_button.m_texture = demo_3d.m_geometry_buffer.m_albedo;
-        ui_demo.m_button_2.m_texture = demo_3d.m_geometry_buffer.m_albedo;
+        ui_demo.m_button_2.m_texture = demo_3d.m_geometry_buffer.m_depth;
 
 
         while(!window->shouldClose()) {

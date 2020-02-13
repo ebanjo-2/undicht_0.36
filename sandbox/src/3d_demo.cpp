@@ -48,13 +48,13 @@ namespace undicht {
 
     void Demo3D::draw() {
 
-        m_renderer.submit(&m_camera);
+        /*m_renderer.submit(&m_camera);
 
         for(TexturedModel& model : m_sponza.m_sub_models) {
 
             m_renderer.draw(model);
 
-        }
+        } */
 
         m_geometry_stage.submit(&m_camera);
         m_geometry_stage.submit(&m_geometry_buffer);

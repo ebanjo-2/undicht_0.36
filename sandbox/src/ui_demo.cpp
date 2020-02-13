@@ -18,16 +18,16 @@ namespace undicht {
         FntFileReader fnt_reader("res/fonts/sans/sans.fnt");
         fnt_reader.loadFont(m_font);
 
-        m_button.setPosition(glm::vec2(0.0,0.0));
-        m_button.setSize(glm::vec2(0.6, 0.6));
-        m_button.setCaption(Label("hello world", m_font));
+        m_button.setPosition(glm::vec2(0.5,0.0));
+        m_button.setSize(glm::vec2(1, 1));
+        //m_button.setCaption(Label("hello world", m_font));
         m_button.m_caption.setColor(glm::vec4(1,1,1, 0.9));
         m_button.m_caption.setEdgeColor(glm::vec4(1));
 
 
-        m_button_2.setPosition(glm::vec2(-0.8,0.8));
-        m_button_2.setSize(glm::vec2(0.2, 0.2));
-        m_button_2.setCaption(Label("hello world 2", m_font));
+        m_button_2.setPosition(glm::vec2(-0.5,0.0));
+        m_button_2.setSize(glm::vec2(1, 1));
+        //m_button_2.setCaption(Label("hello world 2", m_font));
         m_button_2.m_caption.setColor(glm::vec4(1,1,1, 0.9));
         m_button.m_caption.setEdgeColor(glm::vec4(1));
 
