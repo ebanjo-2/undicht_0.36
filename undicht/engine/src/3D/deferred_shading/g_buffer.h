@@ -15,6 +15,7 @@ namespace undicht {
             graphics::Texture m_albedo;
             graphics::Texture m_depth;
 
+            /** to be called after the size was set */
             void initialize();
             void terminate();
 

@@ -15,6 +15,8 @@ namespace undicht {
 
                     core::SharedID m_id = 0;
 
+                    std::vector<std::string> m_textures; // storing the name of each texture loaded to the shader
+
                     Shader();
                     virtual ~Shader();
 
@@ -32,6 +34,7 @@ namespace undicht {
                 public:
                     // not api functions
 
+                    virtual int getTextureID(const std::string& texture_name);
 
                     virtual void bind();
 

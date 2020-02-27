@@ -121,7 +121,7 @@ namespace undicht {
                 if(real_texture->m_type && real_texture->m_id) {
                     // binding the texture and setting the sampler uniform in the shader
                     real_texture->bind();
-                    int texture_id = 0; // only one texture per shader
+                    int texture_id = getTextureID(real_texture->m_name);
                     graphics::Uniform u;
                     u.setData(&texture_id, UND_INT);
                     u.setName(real_texture->m_name);
@@ -133,6 +133,26 @@ namespace undicht {
 
 
             /////////////////////////////////////// non api functions ///////////////////////////////////////
+
+            int Shader::getTextureID(const std::string& texture_name) {
+
+                // checking if the texture name already has an id associated with it
+                for (int i = 0; i < m_textures.size(); i++) {
+
+                    if(!m_textures.at(i).compare(texture_name)) {
+
+                        return i;
+                    }
+
+                }
+
+
+                // adding the texture to the list of textures loaded to the shader
+                m_textures.push_back(texture_name);
+
+                return m_textures.size() - 1;
+            }
+
 
             void Shader::bind() {
 

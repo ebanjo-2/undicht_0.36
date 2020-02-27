@@ -96,6 +96,7 @@ int main(){
 
                 frame_count = 1;
                 first_time = Core::getTime();
+
             }else {
                 frame_count++;
             }

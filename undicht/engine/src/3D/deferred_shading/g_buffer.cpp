@@ -11,7 +11,8 @@ namespace undicht {
     GBuffer::GBuffer() {
         //ctor
 
-
+        m_albedo.setName("scene_albedo");
+        m_depth.setName("scene_depth");
 
     }
 
